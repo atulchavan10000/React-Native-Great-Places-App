@@ -36,9 +36,10 @@ const ImgPicker = props => {
             quality: 0.5
         });
         setPickedImage(image.uri);
+        props.onImageTaken(image.uri);
     };
     return (
-        <View style={styles.stylePicker}>
+        <View style={styles.imagePicker}>
             <View style={styles.imagePreview}>
                 { !pickedImage
                     ? <Text>No Imge Picked Yet.</Text>
@@ -55,8 +56,9 @@ const ImgPicker = props => {
 }
 
 const styles = StyleSheet.create({
-    ImagePicker: {
-        alignItems: 'center'
+    imagePicker: {
+        alignItems: 'center',
+        marginBottom: 15
     },
     imagePreview: {
         width: '100%',
