@@ -6,7 +6,14 @@ import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import ReduxThunk from 'redux-thunk';
 import placesReducer from './store/reducer/places-reducer';
+import { init } from './helpers/db';
 
+init().then(() => {
+  console.log('Initialized database')
+}).catch(err => {
+  console.log('Initializing db failed');
+  console.log(err);
+}); 
 
 //remove below line before deployment
 //const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
