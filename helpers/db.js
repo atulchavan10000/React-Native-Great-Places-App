@@ -1,4 +1,4 @@
-import { SQLite } from 'expo-sqlite';
+import * as SQLite from 'expo-sqlite';
 
 //creates a db if not available on local otherwise connect to it
 const db = SQLite.openDatabase('places.db');
