@@ -16,7 +16,7 @@ init().then(() => {
 }); 
 
 //remove below line before deployment
-//const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const rootReducer = combineReducers({
   places: placesReducer
@@ -24,10 +24,10 @@ const rootReducer = combineReducers({
 })
 
 //remove composeWithDevTools before deployement
-//const store = createStore(rootReducer, composeEnhancer(applyMiddleware(ReduxThunk)),);
+const store = createStore(rootReducer, composeEnhancer(applyMiddleware(ReduxThunk)),);
 
 //replace above line with below and remove composeWithDevTools() before deployment
-const store = createStore(rootReducer, composeWithDevTools(), applyMiddleware(ReduxThunk));
+//const store = createStore(rootReducer, composeWithDevTools(), applyMiddleware(ReduxThunk));
 
 
 export default function App() {

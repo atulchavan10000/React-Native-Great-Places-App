@@ -18,7 +18,7 @@ const ImgPicker = props => {
         if (result.status !== 'granted') {
             Alert.alert(
                 'Insufficient Permission!',
-                'You need to grand camera permissions to use this app.',
+                'You need to grant camera permissions to use this app.',
                 [{ text: 'Okay' }]
             );
             return false;
