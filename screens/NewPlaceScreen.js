@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import {
     View,
     Text,
@@ -16,6 +16,7 @@ import LocationPicker from '../components/LocationPicker';
 const NewPlaceScreen = props => {
     const [titleValue, setTitleValue] = useState('');
     const [selectedImage, setSelectedImage] = useState();
+    const [seletectedLocation, setSelectedLocation] = useState();
     const dispatch = useDispatch();
 
     const titleChangeHandler = text =>{
@@ -28,10 +29,15 @@ const NewPlaceScreen = props => {
     }
 
     const savePlaceHanlder = () =>{
-        dispatch(placesActions.addPlace(titleValue, selectedImage));
+        dispatch(placesActions.addPlace(titleValue, selectedImage, seletectedLocation));
         props.navigation.goBack();
     };
 
+    // to avoid the infinite loop we used useCallback
+    // to avoid getting this rendered with every render cycle
+    const locationPickedHandler = useCallback(location => {
+        setSelectedLocation(location)
+    }, []) ;
     return (
         <ScrollView>
             <View style={styles.form}>
@@ -42,7 +48,7 @@ const NewPlaceScreen = props => {
                     value={titleValue}
                 />
                 <ImagePicker onImageTaken={imageTakenHandler}/>
-                <LocationPicker navigation={props.navigation}/>
+                <LocationPicker navigation={props.navigation} onLocationPicked={locationPickedHandler}/>
                 <Button 
                     title="Save Place" 
                     color={Colors.primary}
